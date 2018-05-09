@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 	
 $personalDeviceId = $_SESSION['currentDeviceId'];
@@ -104,38 +105,86 @@ $getDrugsName1="SELECT DrugName FROM UserDrugs WHERE UserDrugs.DeviceID=$persona
     text-decoration: underline;
 	}
 	</style>
-  
+      <script>
+        function  logout(){
+window.location='logout2.php';
+            
+                }
+        
+    </script>
+    
   </head>
 
   <body onload= "getDate();AddNewAlert()">
 
-    <!-- Navigation -->
+        <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.php" ><img src="img/logo.png" height= 80 px; width= 300px; style=" top: 0; left:0; position: absolute" alt= "SmartMed logo"></a>
+      <div class="container-fluid">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ">
+              
+              
+            <li class="nav-item">
+              <a class="nav-link" >hello
+              <?php
+              
+
+              if( !isset($_SESSION['currentName']) ){
+                            echo "user";
+                            }
+                else{
+                echo $_SESSION['currentName'];
+                ?>
+                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
+                <?php
+                } 
+                ?>
+
+              </a>
+            </li>
+            </ul>
+            
+            <ul class= "navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home</a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="signin.php">Sign in</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="YourAccount.php">My Account</a>
+              <a class="nav-link" id = "account" href="YourAccount.php">My Account</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("account").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
             </li>
 			<li class="nav-item">
               <a class="nav-link" href="Contact us.php">Contact us</a>
             </li>
+            
           </ul>
+           <ul class= "navbar-nav ml-auto">
+               </ul>
+                          <ul class= "navbar-nav ml-auto">
+               </ul>
         </div>
       </div>
     </nav>
-
+    
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/Account-bg.jpg')">
       <div class="overlay"></div>
