@@ -1,13 +1,4 @@
 <?php
-
-session_start();
-
-	
-$personalDeviceId = $_SESSION['currentDeviceId'];
-$personalName=$_SESSION['currentName'];
-$personalEmail=	$_SESSION['CurrentEmail'];
-
-
 $servername = "zebra";
 $username = "shaniru";
 $password = "sbbzL9TnK^1Y";
@@ -20,45 +11,163 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
-
+session_start();
  $sqlGetRealAmount="SELECT *
  FROM Cell  INNER JOIN UserDrugs 
-      ON Cell.CellID=UserDrugs.CellID 
-      WHERE PillAmount< 5 AND IfEmpty = 0 ";
+      ON Cell.CellID=UserDrugs.CellID AND Cell.DeviceID = UserDrugs.DeviceID
+      INNER JOIN Users ON Users.DeviceID = UserDrugs.DeviceID
+      WHERE PillAmount< 5 AND IfEmpty = 0 ORDER BY Users.Email";
+$resultGetRealAmount = $conn->query($sqlGetRealAmount);
+$num_rows = mysqli_num_rows($resultGetRealAmount);
+echo "this is num ". $num_rows;
+echo"<br>";
+echo "yoyoy ". $row['DrugName'];
+echo"<br>";
+echo"<br>";
 
- $resultGetRealAmount = $conn->query($sqlGetRealAmount);
-	  
-require_once  'autoload.php';
+ if ($resultGetRealAmount->num_rows > 0 ) {
+     
+    require 'phpmailer/PHPMailerAutoload.php';
+    $mail = new PHPMailer();
 
-$client = new Google_Client();
-$client->setApplicationName("Client_Library_Examples");
-$client->setDeveloperKey("AIzaSyAY0jYeve75xV4lQHiTWc9dIuUBW-JNrYo");
+    $mail->Host = "smtp.gmail.com";
+    $mail->SMTPSecure = "ssl";
+	$mail->Port = 465;
+    $mail->SMTPAuth = true;
 
-$service = new Google_Service_Books($client);
-$optParams = array('filter' => 'free-ebooks');
-$results = $service->volumes->listVolumes('Henry David Thoreau', $optParams);
+    $mail->Username = 'noreply.smartmed@gmail.com';
+    $mail->Password = 'sadna2018';
+    $mail->setFrom('noreply.smartmed@gmail.com', 'SmartMed');
+$i=0;
+$rowFlag = $resultGetRealAmount->fetch_assoc();
 
-foreach ($results as $item) {
-  echo $item['volumeInfo']['title'], "<br /> \n";
-}
+$mail->addAddress($rowFlag['Email']);
 
-	  // send in a mail - DrugID in cell number CellID has less then 5 pills.
-	 /*
-$user = 'me';
-$strSubject = 'Test mail using GMail API' . date('M d, Y h:i:s A');
-$strRawMessage = "From: myAddress<no.reply.smartmed@gmail.com>\r\n";
-$strRawMessage .= "To: toAddress <shanireuveni31@gmail.com>\r\n";
-$strRawMessage .= 'Subject: =?utf-8?B?' . base64_encode($strSubject) . "?=\r\n";
-$strRawMessage .= "MIME-Version: 1.0\r\n";
-$strRawMessage .= "Content-Type: text/html; charset=utf-8\r\n";
-$strRawMessage .= 'Content-Transfer-Encoding: quoted-printable' . "\r\n\r\n";
-$strRawMessage .= "this <b>is a test message!\r\n";
-// The message needs to be encoded in Base64URL
-$mime = rtrim(strtr(base64_encode($strRawMessage), '+/', '-_'), '=');
-$msg = new Google_Service_Gmail_Message();
-$msg->setRaw($mime);
-//The special value **me** can be used to indicate the authenticated user.
-$service->users_messages->send("me", $msg);
+$mail->Subject = 'Pills status in Device: '.$rowFlag['DeviceID'];
+$mail->Body.=    "Hello " .$rowFlag['Name']."\n";
+$mail->Body.=    "The following cells have less then 5 pills:\n";
+$resultGetRealAmount = $conn->query($sqlGetRealAmount);
+echo "the first rowflag 1 ".$rowFlag['Email'];
+	           echo "<br>";
 
-*/
+	   while($row = $resultGetRealAmount->fetch_assoc())
+	   {
+	       $i++;
+	           echo "the while ".$row['DrugName'];
+	           echo "<br>";
+	           echo "the while row ".$row['Email'];
+	           echo "<br>";
+	           echo "the while rowflag ".$rowFlag['Email'];
+	           echo "<br>";	 
+	           echo $i;
+	           echo "<br>";	 
+
+	           
+	       if($rowFlag['Email']==$row['Email']){
+	           
+	           $mail->Body.=    "The medicine ". $row['DrugName']. " has ".$row['PillAmount']. " pills in cell number  ".$row['CellID']."\n";
+	           
+	           if($i==$num_rows)
+	           {
+	               	  if ($mail->send()){
+    	              echo "Mail sent ".$rowFlag['Email'];
+    	                echo "<br>";	   
+	           }
+    	        if (!$mail->send()){
+                        echo 'mailer error: '. $mail->ErrorInfo;
+    	        }
+	           }	           
+	           
+	           
+          
+	       }
+	       
+	       else{
+	           if ($mail->send()){
+    	              echo "Mail sent ".$rowFlag['Email'];
+    	              	           echo "<br>";	   
+
+	           }
+    	        if (!$mail->send()){
+                        echo 'mailer error: '. $mail->ErrorInfo;
+    	        }
+    	          $rowFlag = $row;
+    	          
+                  $mail = new PHPMailer();
+
+                  $mail->Host = "smtp.gmail.com";
+                  $mail->SMTPSecure = "ssl";
+	              $mail->Port = 465;
+                  $mail->SMTPAuth = true;
+
+                  $mail->Username = 'noreply.smartmed@gmail.com';
+                  $mail->Password = 'sadna2018';
+                  $mail->setFrom('noreply.smartmed@gmail.com', 'SmartMed');
+
+ 	           echo "the while rowflag ".$rowFlag['Email'];
+	           echo "<br>";	   
+	           
+            $mail->addAddress($rowFlag['Email']);
+            $mail->Subject = 'Pills status in Device: '.$rowFlag['DeviceID'];
+            $mail->Body.=    "Hello " .$rowFlag['Name']."\n";
+            $mail->Body.=    "The following cells have less then 5 pills:\n";
+$mail->Body.=    "The medicine ". $rowFlag['DrugName']. " has ".$rowFlag['PillAmount']. " pills in cell number  ".$rowFlag['CellID']; 
+
+	           echo "the while ".$row['DrugName'];
+	           echo "<br>";
+	           echo "the while row ".$row['Email'];
+	           echo "<br>";
+	           echo "the while rowflag ".$rowFlag['Email'];
+	           echo "<br>";	   
+	           	           echo "<br>";	 
+	           echo $i;
+	           echo "<br>";	 
+	           echo $num_rows;
+	           if($i==$num_rows)
+	           {
+	               	  if ($mail->send()){
+    	              echo "Mail sent ".$rowFlag['Email'];
+    	              	           echo "<br>";	   
+	           }
+    	        if (!$mail->send()){
+                        echo 'mailer error: '. $mail->ErrorInfo;
+    	        }
+	           }
+
+          }//else
+          
+          
+	   }//while fetch
+	   
+	   
+	  }//if the numrows>0
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+             
+            
+            
+            
+            
+            
+            
+    	/*       echo "the else row ".$row['Email'];
+	           echo "<br>";
+	           echo "the else rowflag ".$rowFlag['Email'];
+	           echo "<br>";	         
+	           echo "<br>";	   
+            echo "the new mailadress ".   $mail->Subject();            
+              echo "the new mailadress ".  $mail->addAddress();*/
+
 ?>
+
+
+
+
+
