@@ -15,7 +15,6 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -43,51 +42,96 @@ if ($conn->connect_error) {
     <link href="css/clean-blog.min.css" rel="stylesheet">
     
    <link rel="stylesheet" href="css/foofoo.css">
+    
+    <script>
+        function  logout(){
+window.location='logout2.php';
+            
+                }
+        
+    </script>
+    
+        <style>
+     @media only screen and (max-width:992px) {
+    /* For tablets: */
+  #sub{
+	  display:none;
+  }
+
+ }
+ </style>
   </head>
 
   <body>
 
-    <!-- Navigation -->
+        <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.php" ><img src="img/logo.png" height= 80 px; width= 300px; style=" top: 0; left:0; position: absolute" alt= "SmartMed logo"></a>
-        
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="container-fluid">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ">
+      
+              
             <li class="nav-item">
-              <a class="nav-link">hello
+              <a class="nav-link" >hello
               <?php
+              
+
               if( !isset($_SESSION['currentName']) ){
                             echo "user";
                             }
-                else
+                else{
                 echo $_SESSION['currentName'];
-              ?>
-              
-              
+                ?>
+                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
+                <?php
+                } 
+                ?>
+
               </a>
             </li>
+            </ul>
+            
+            <ul class= "navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home</a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="signin.php">Sign in</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="YourAccount.php">My Account</a>
+              <a class="nav-link" id = "account" href="YourAccount.php">My Account</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("account").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
             </li>
 			<li class="nav-item">
               <a class="nav-link" href="Contact us.php">Contact us</a>
             </li>
+            
           </ul>
+           <ul class= "navbar-nav ml-auto">
+               </ul>
+                          <ul class= "navbar-nav ml-auto">
+               </ul>
         </div>
       </div>
     </nav>
-
+    
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/home-bg.jpg')">
       <div class="overlay"></div>
@@ -96,78 +140,56 @@ if ($conn->connect_error) {
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="site-heading">
               <h1>SmartMed</h1>
-              <span class="subheading">Your Friendly Neighborhood Pill Reminder</span>
+              <span class="subheading" id="sub">Your Friendly Neighborhood Pill Reminder</span>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            
-        
-	 <div class="post-preview" style=float:left;width:40%;>
-	     
-        <form action="index.php" method="POST">
-	    <div class="input-group">
-	    <div class="form-group floating-label-form-group controls">
-		<label>Box Id</label>
-		<input type="number" name="DeviceId" placeholder="Box serial number" required>
-	</div>
-	</div>
-	<div class="input-group">
-	    <div class="form-group floating-label-form-group controls">
-		<label>Email</label>
-		<input type="email" name="Email" placeholder="Email" required>
-	</div>
-	</div>
-	<div class="input-group">
-		<button type="submit" class="btn" name="submit">Log In</button>
-	</div>
-	    </form>
-	    
-	    
-	 <form action=# method="GET">
-			 <div>
-              <div class="form-group floating-label-form-group controls">
-                <label>Box Serial number</label>
-                <input type="number" class="form-control" placeholder="Box Serial number" id="BoxSerialNumber" name="DeviceId"  required data-validation-required-message="Please enter your Deivce id.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls">
-                <label>Email Address</label>
-                <input type="email" class="form-control" placeholder="Email Address" id="email" name="email" required data-validation-required-message="Please enter your email address.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-    
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls">
-                <label>Full Name</label>
-                <input type="text" class="form-control" placeholder="Full Name" id="name" name="FullName" required data-validation-required-message="Please enter your Full name.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-			<input type="submit" name="submit" value="Sign up"><br><br>
-		</form>
-		    
-		    
-		    
-        </div> 
+ 
 		 
-         <div class="post-preview" style=float:right;width:60%;>
-			<p> SmartMed Helps you take medication in an orderly manner,<br>
-			it will remind you of the medications and inform your contact of current updates.</p>
+         <div class="post-preview text-center" >
+			<p><b><cetner> SmartMed Helps you take medication in an orderly manner,<br>
+			it will remind you of the medications and inform your contact of current updates.</center></b></p>
+			
+			<img src= "https://medqpillbox.com/wp-content/uploads/2017/10/pill-box-with-flashing-play-1-1.gif" alt="SmardMed device" height="300" width=300" class="img-rounded"> <br><br>
+			<b><p><center>What are our goals?</center></p></b>
+        <div class="container">
+        <div class="row">
+           <div class="col-md-3">  Reduce medication discontinuation </div>
+           <div class="col-md-3"> Allow the contact to monitor the taking of drugs, the stock of pills and the treatment of a common case. </div>
+            <div class="col-md-3"> Improve the life of taking medication </div>
+            <div class="col-md-3"> Allow the drug user a free life without thinking about the common use of medications </div>
+            <br><br>
+
+
 		  </div>	
-          
+             <p><b> <center>How It Works?</center></b></p>
+             Buy a "SmartMed" device at the pharmacies. <br>
+Connect to the site using the ID number that appears behind the device.<br>
+Add medications and alerts, keep track of the medication. <br>
+Get alerted on the device on time to take a ball. <br>
+After taking the ball, push the button so everyone knows that the ball is taken and no one will worry! <br>
+
+  <p> <b><center>What is special about us?</center></b></p>
+        <div class="row">
+         <div class="col-md-3">When an alert is added, a check is conducted with the international drug store to prevent the taking of parallel drugs that are dangerous to take together.</div>
+       <div class="col-md-3">  Managing inventory through the website, receiving updates to the email if the medication is about to run out.</div>
+        <div class="col-md-3"> An update on non-taking if the drug was not taken for half an hour.</div>
+        <div class="col-md-3"> A friendly, small and comfortable device.</div>
+        </div>
+        
+             <b> <p><center>About us</center></p></b>
+         <div class="row">
+               <div class="col-md-4">Ido Keynan <br> Student Information Systems at Tel Aviv University, wears tabula socks .</div>
+                <div class="col-md-4">Shani Reuveni <br> Student Information Systems at Tel Aviv University, PMO IT - "Strauss Water" Company.</div>
+                 <div class="col-md-4">Adam Kobo <br> Student Information Systems at Tel Aviv University, </div>
       </div>
     </div>
+    
+
+    
 
 
 
