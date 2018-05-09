@@ -1,4 +1,20 @@
 
+<?php
+session_start();
+
+$servername = "zebra";
+$username = "shaniru";
+$password = "sbbzL9TnK^1Y";
+$dbname = "shaniru_Drugs";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+}
+
+?>
 
 <html lang="en">
 
@@ -22,36 +38,96 @@
 
     <!-- Custom styles for this template -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
+       <link rel="stylesheet" href="css/foofoo.css">
 
+    <script>
+        function  logout(){
+            alert ("enter");
+            
+window.location='logout2.php';
+            
+                }
+        
+    </script>
     
+              <style>
+     @media only screen and (max-width:992px) {
+    /* For tablets: */
+  #sub{
+	  display:none;
+  }
+
+ }
+ </style>
   </head>
 
+  <body >
+      
 
-  <body>
-
-    <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.php" ><img src="img/logo.png" height= 80 px; width= 300px; style=" top: 0; left:0; position: absolute" alt= "SmartMed logo"></a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container-fluid">
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ">
+              
+              
+            <li class="nav-item">
+              <a class="nav-link" >hello
+              <?php
+              
+
+              if( !isset($_SESSION['currentName']) ){
+                            echo "user";
+                            }
+                else{
+                echo $_SESSION['currentName'];
+                ?>
+                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
+                <?php
+                } 
+                ?>
+
+              </a>
+            </li>
+            </ul>
+            
+            <ul class= "navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home</a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="signin.php">Sign in</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="YourAccount.php">Account</a>
+              <a class="nav-link" id = "account" href="YourAccount.php">My Account</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("account").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
             </li>
 			<li class="nav-item">
               <a class="nav-link" href="Contact us.php">Contact us</a>
             </li>
+            
           </ul>
+           <ul class= "navbar-nav ml-auto">
+               </ul>
+                          <ul class= "navbar-nav ml-auto">
+               </ul>
         </div>
       </div>
     </nav>
@@ -63,94 +139,173 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="page-heading">
-              <h1>Sign in</h1>
+              <h1>Sign In</h1>
+              <span class="subheading" id="sub">Always connected, always updated
+</span>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
-    
-    
-    <div data-role="main" class="ui-content">
+     <!-- Main Content -->
+           <div class= "text-center">
+			<p> Login to the system is done through the device available at the pharmacies. <br>
+			Enter the device number from the back to add drugs and track alerts.
+</p>
+		  </div>	
+     
+    <div class="container col-centered">
         
-        <?php
-        if(isset($_SESSION['u_box'])) {
-            echo "You are logged in!";
-        }
-        ?>
-        
-        <?php
-            if (isset($_SESSION['u_box'])){
-                echo '<form action="includes/logout.inc.php" method="POST">
-                <button type="submit name="submit">Logout</button></form>';
-            }
+
+
+      <div class="row">
+          
             
-                
-                /* else {
-                echo '<form action="includes/login.inc.php" method="POST">
-			 <div class="control-group">
-              <div class="form-group floating-label-form-group controls">
+        <div class="col-lg-6 ">
+            <h2> Log In</h2>
+	 <div class="post-preview" style=float:left;width:40%;>
+        <form action="#" method="POST">
+	    <div class="input-group">
+	    <div class="form-group floating-label-form-group controls">
+		<label>Box Id</label>
+		<input type="number" name="DeviceId" size= "20 min="1000" max="100000" placeholder="Box serial number" required>
+	</div>
+	</div>
+	
+	<div class="input-group">
+	    <div class="form-group floating-label-form-group controls">
+		<label>Email</label>
+		<input type="email" name="Email" placeholder="Email" required>
+	</div>
+	</div>
+	
+	<div class="input-group">
+		<button type="submit" class="btn" name="submit">Log In</button>
+	</div>
+	    </form>
+	 </div>
+	 </div>
+	  
+	<div class="col-lg-6 ">
+      <h2> Sign Up</h2>
+	 <div class="post-preview" style=float:left;width:40%;>
+	 <form action= "signin.php" method="GET">
+	     	    <div class="input-group">
+          	 <div class="form-group floating-label-form-group controls">
                 <label>Box Serial number</label>
-                <input type="number" class="form-control" placeholder="Box Serial number" id="BoxSerialNumber" name="DeviceId"  required data-validation-required-message="Please enter your name.">
+                <input type="number" class="form-control" placeholder="Box Serial number" size= "20 min="1000" max="100000" id="BoxSerialNumber" name="DeviceId"  required data-validation-required-message="Please enter your Deivce id.">
                 <p class="help-block text-danger"></p>
               </div>
-            </div>
+              </div>
 
-            <div class="control-group">
+	            <div class="input-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Email Address</label>
-                <input type="email" class="form-control" placeholder="Email Address" id="email" name="Email" required data-validation-required-message="Please enter your email address.">
-                <p class="help-block text-danger"></p>
-                </div>
-            </div>
-			<input type="submit" name="submit" value="Log in"><br><br>
-			</form>';}
-            */
-            
-            ?>
-        
-   <!-- Signup -->      
-        <form action="includes/signup.inc.php" method="POST">
-			 <div class="control-group">
-              <div class="form-group floating-label-form-group controls">
-                <label>Box Serial number</label>
-                <input type="number" class="form-control" placeholder="Box Serial number" id="BoxSerialNumber" name="DeviceId"  required data-validation-required-message="Please enter your name.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls">
-                <label>Email Address</label>
-                <input type="email" class="form-control" placeholder="Email Address" id="email" name="Email" required data-validation-required-message="Please enter your email address.">
+                <input type="email" class="form-control" placeholder="Email Address" id="email" name="email" required data-validation-required-message="Please enter your email address.">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
     
-            <div class="control-group">
+	        <div class="input-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Full Name</label>
                 <input type="text" class="form-control" placeholder="Full Name" id="name" name="FullName" required data-validation-required-message="Please enter your Full name.">
                 <p class="help-block text-danger"></p>
               </div>
             </div>
-			<input type="submit" name="submit" value="Sign up"><br><br>
+			<input type="submit" class="btn" name="submit" value="Sign up"><br><br>
 		</form>
-		
+    </div>
+    </div>
+    
+		    <?php
+if ($_GET)
+{
+    $newBoxID = $_GET['DeviceId'];
+    $newName = $_GET['FullName'];
+    $newEmail = $_GET['email'];
 
+    $ValidationIDsql = "SELECT * FROM Users WHERE DeviceID='$newBoxID'";
+			$ChekingValidResult = $conn->query($ValidationIDsql);
+	        	if ($ChekingValidResult->num_rows > 0) {
+					    $message = "This device is already exists";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
+			} 
+			else{
+			    $sqlCheckDevice="SELECT * FROM Device WHERE  DeviceID='$newBoxID'";
+			    $resultCheckDevice = $conn->query($sqlCheckDevice);
+
+			    if ($resultCheckDevice->num_rows > 0) {
+
+			     $sqlInsertNewUser="INSERT INTO Users (DeviceID, Name, Email) VALUES ($newBoxID,'$newName','$newEmail')";
+$resultInsertNewUser = $conn->query($sqlInsertNewUser);
+
+      if($resultInsertNewUser){
+          	 $message = "Welcome to SmartMed!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+      }
+      else{
+           $message = "Something got wrong, please try again";
+           echo "<script type='text/javascript'>alert('$message');</script>";
+      }
+      for($i=1;$i<=7;$i++)
+      {
+         $sqlInsertNewCells="INSERT INTO Cell (CellID, PillAmount, IfEmpty,DeviceID) VALUES ($i,0,1,$newBoxID)";
+            $resultInsertNewCells = $conn->query($sqlInsertNewCells);
+      }
+          
+      }
+      else{
+           $message = "Device number does not exist";
+           echo "<script type='text/javascript'>alert('$message');</script>";
+
+      }
       
+
+}
+
+}
+    if ($_POST){ 
+        
+       // include_once 'dbl.inc.php';
+        	$user_box = $_POST['DeviceId'];
+            $user_email = $_POST['Email'];
+			$ChekingDatasql = "SELECT * FROM Users WHERE Email = '$user_email' AND DeviceID='$user_box'";
+
+			$ChekingDataResult = $conn->query($ChekingDatasql);
+	        	if ($ChekingDataResult->num_rows < 1) {
+					    $message = "One or more of the details is not correct";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
+				exit();
+			} 
 			
-    </div>
-    </div>
+			
+				else {
+				    $row = $ChekingDataResult->fetch_assoc();
+                    //correct information
+					$_SESSION['currentDeviceId'] = $row['DeviceID'];
+					$_SESSION['currentName'] = $row['Name'];
+					$_SESSION['CurrentEmail'] = $row['Email'];
+					
+					  $message = "Login successful!";
+           echo "<script type='text/javascript'>alert('$message');
+           window.location='YourAccount.php';</script>";
+
+					
+				}
+				}    
+				
+
+?>
+	</div>
+	</div>
+		    
 
     <hr>
 
     <!-- Footer -->
-    <footer>
+    <footer style="clear:both;">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
