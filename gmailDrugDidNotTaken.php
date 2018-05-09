@@ -20,31 +20,79 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
+$today= date("l");
+$todayID;
 
- $sqlGetRealAmount="SELECT *
- FROM Cell  INNER JOIN UserDrugs 
-      ON Cell.CellID=UserDrugs.CellID 
-      WHERE PillAmount< 5 AND IfEmpty = 0 ";
+   if($today==Sunday)
+     $todayID=1;
+    if($today==Monday)
+     $todayID=2;
+    if($today==Tuesday)
+     $todayID=3;
+     if($today==Wednesday)
+     $todayID=4;
+     if($today==Thursday)
+     $todayID=5;
+     if($today==Friday)
+     $todayID=6;
+     if($today==Saturday)
 
- $resultGetRealAmount = $conn->query($sqlGetRealAmount);
+date_default_timezone_set("Asia/Jerusalem");  
+$nowHour= date(" H")+3;  
+
+    
+    if ( date("i") == 30){
+
+ $sqlGetDrugDidNotTaken="SELECT *
+ FROM Alerts  INNER JOIN UserDrugs 
+      ON Alerts.CellID=UserDrugs.CellID 
+       AND Alerts.DeviceID = UserDrugs.DeviceID
+      INNER JOIN Users ON Users.DeviceID = UserDrugs.DeviceID
+      WHERE DayAlert=$todayID AND  HourAlert=$nowHour AND IfTake = 0";
+      
+ $resultGetDrugDidNotTaken = $conn->query($sqlGetDrugDidNotTaken);
 	  
-	  // send in a mail - DrugID in cell number CellID has less then 5 pills.
 	  
-$user = 'me';
-$strSubject = 'Test mail using GMail API' . date('M d, Y h:i:s A');
-$strRawMessage = "From: myAddress<no.reply.smartmed@gmail.com>\r\n";
-$strRawMessage .= "To: toAddress <shanireuveni31@gmail.com>\r\n";
-$strRawMessage .= 'Subject: =?utf-8?B?' . base64_encode($strSubject) . "?=\r\n";
-$strRawMessage .= "MIME-Version: 1.0\r\n";
-$strRawMessage .= "Content-Type: text/html; charset=utf-8\r\n";
-$strRawMessage .= 'Content-Transfer-Encoding: quoted-printable' . "\r\n\r\n";
-$strRawMessage .= "this <b>is a test message!\r\n";
-// The message needs to be encoded in Base64URL
-$mime = rtrim(strtr(base64_encode($strRawMessage), '+/', '-_'), '=');
-$msg = new Google_Service_Gmail_Message();
-$msg->setRaw($mime);
-//The special value **me** can be used to indicate the authenticated user.
-$service->users_messages->send("me", $msg);
+ if ($resultGetDrugDidNotTaken->num_rows > 0 ) {
+    require 'phpmailer/PHPMailerAutoload.php';
 
 
+ while($row = $resultGetDrugDidNotTaken->fetch_assoc())
+     
+ {
+         $mail = new PHPMailer();
+
+     
+     $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPSecure = 'ssl';
+	$mail->Port = 465;
+    $mail->SMTPAuth = true;
+
+    $mail->Username = 'noreply.smartmed@gmail.com';
+    $mail->Password = 'sadna2018';
+    $mail->setFrom('noreply.smartmed@gmail.com', 'SmartMed');
+    
+$mail->addAddress($row ['Email']);
+$mail->Subject = 'SmartMed: Medication was not taken ';
+$mail->Body.=    "Hello " .$row['Name']."\n";
+ $mail->Body.=    "We wanted to update that drug " .$row['DrugName'] ."  in cell number " .$row['CellID'] ." was not taken today at " .$row['HourAlert'].":00 \n  \n";
+ $mail->Body.=    "Remember - taking medication keeps your health. \n  \n";
+ $mail->Body.=    "good day, \n ";
+ $mail->Body.=    "SmartMed \n";
+
+
+
+    	        if ($mail->send()){
+                        echo 'mail send  ';
+    	        }
+	       
+	       else{
+                        echo 'mailer error: '. $mail->ErrorInfo;
+    	        }
+	           
+	           
+
+}
+}
+}
 ?>
