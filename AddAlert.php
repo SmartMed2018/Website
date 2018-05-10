@@ -200,9 +200,10 @@ window.location='logout2.php';
     </header>
 
     <!-- Main Content -->
-    <div class="container-fluid">
+    <div class="container-fluid>
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto ">
+
 		<form style="width: 140%;" action="server1">
 	     <i class="asd" onclick="AddNewAlert()"> Add New Alert &nbsp;</i>
 			
@@ -213,6 +214,7 @@ window.location='logout2.php';
          <i class="asd" onclick="ManageMedicine()"> Manage Medicines </i>
 
 		</form>
+		
 
               
 		<form name = "myForm" action="#" method="get">
@@ -261,8 +263,8 @@ window.location='logout2.php';
 						<label>Evening</label> &nbsp
 						<input id="Night" name="time[]" type="checkbox" value="22" />
 						<label>Night</label> &nbsp
-						</div><br>
-						<input type="submit" value="Add alert" id="clickMe"> <br><br>	
+						</div><br><center>
+						<input type="submit" class="btn-primary btn" value="Add alert" id="clickMe"></center> <br><br>	
 		</form>	
 					
 					
@@ -409,22 +411,22 @@ else{
 
     <hr>
     
-    <!-- Footer -->
+       <!-- Footer -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <ul class="list-inline text-center">
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.linkedin.com/home">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
                   </span>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.facebook.com/">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -432,7 +434,7 @@ else{
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://github.com/orgs/SmartMed2018/dashboard">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -441,10 +443,12 @@ else{
               </li>
             </ul>
             <p class="copyright text-muted">Copyright &copy; SmartMed team 2018</p>
-            </div>
+          </div>
+        </div>
       </div>
     </footer>
-
+    
+    
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
