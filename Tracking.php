@@ -60,34 +60,83 @@ if ($conn->connect_error) {
 
    <link rel="stylesheet" href="css/foofoo.css">
       
+          
+    <script>
+        function  logout(){
+window.location='logout2.php';
+            
+                }
+        
+    </script>
   </head>
 
   <body onload= "getDate();PillTakingStatus">
       
 
-    <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.php" ><img src="img/logo.png" height= 80 px; width= 300px; style=" top: 0; left:0; position: absolute" alt= "SmartMed logo"></a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+     <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container-fluid">
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ">
+              
+              
+            <li class="nav-item">
+              <a class="nav-link" >hello
+              <?php
+              
+
+              if( !isset($_SESSION['currentName']) ){
+                            echo "user";
+                            }
+                else{
+                echo $_SESSION['currentName'];
+                ?>
+                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
+                <?php
+                } 
+                ?>
+
+              </a>
+            </li>
+            </ul>
+            
+            <ul class= "navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home</a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="signin.php">Sign in</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="YourAccount.php">My Account</a>
+              <a class="nav-link" id = "account" href="YourAccount.php">My Account</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("account").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
             </li>
 			<li class="nav-item">
               <a class="nav-link" href="Contact us.php">Contact us</a>
             </li>
+            
           </ul>
+           <ul class= "navbar-nav ml-auto">
+               </ul>
+                          <ul class= "navbar-nav ml-auto">
+               </ul>
         </div>
       </div>
     </nav>
@@ -139,13 +188,13 @@ if ($conn->connect_error) {
 		 <option value="6" > Friday </option>
 		 <option value="7" > Saturday </option>
 		 </select>
-		 <input type= "submit" value="Present"> <br><br>
+		 <input type= "submit" class="btn-primary btn" value="Present"> <br><br>
 		 
 		   <?php
 		   
     if ($_GET){    
         if ($resultTracking->num_rows > 0 ) {
-     echo "<style> table{ color: black; text-align:center; background-color: white; border: 2px black solid;} tr{ color: black; border: 2px blue solid;} td{ color: black ; border: 2px black solid;}</style><table><tr><th>&nbsp;	 Drug Name &nbsp;	</th><th>&nbsp;	 Hour Alert &nbsp;	</th><th>&nbsp;	 If been Taken &nbsp;	</th></tr>";
+     echo "<style> table{ color: black; text-align:center; background-color: white; border: 2px black solid;} tr{ color: black; border: 2px blue solid;} td{ color: black ; border: 2px black solid;}</style><table class= 'table table-sm table-striped sm'><tr><th>&nbsp;	 Drug Name &nbsp;	</th><th>&nbsp;	 Hour Alert &nbsp;	</th><th>&nbsp;	 If been Taken &nbsp;	</th></tr>";
      // output data of each row
             while($rowT = $resultTracking->fetch_assoc()) {
                 {
@@ -183,22 +232,22 @@ else {
 	</div>  
     <hr>
     
-    <!-- Footer -->
+        <!-- Footer -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <ul class="list-inline text-center">
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.linkedin.com/home">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
                   </span>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.facebook.com/">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -206,7 +255,7 @@ else {
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://github.com/orgs/SmartMed2018/dashboard">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -214,17 +263,10 @@ else {
                 </a>
               </li>
             </ul>
-            <p class="copyright text-muted">Copyright &copy; SmartMed team 2018</p>          </div>
+            <p class="copyright text-muted">Copyright &copy; SmartMed team 2018</p>
+          </div>
         </div>
       </div>
-      
-      <!-- insert a new pill - not working!-->
-      
-      <div id ="insert">
-          
-      </div>
-      
-      
     </footer>
 
     <!-- Bootstrap core JavaScript -->
