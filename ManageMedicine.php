@@ -30,7 +30,6 @@ if ($conn->connect_error) {
 	  //getting the existing names
 	  $getDrugsName1="SELECT DrugName,CellID FROM UserDrugs WHERE UserDrugs.DeviceID=$personalDeviceId";
         $resultCurrentDrugs1 = $conn->query($getDrugsName1);
-        
      //getting the Cell status
       $getCellStatus="SELECT CellID FROM Cell WHERE DeviceID=$personalDeviceId AND IfEmpty='1'";
         $resultCellStatus = $conn->query($getCellStatus);
@@ -66,36 +65,83 @@ if ($conn->connect_error) {
 
 
    <link rel="stylesheet" href="css/foofoo.css">
-  
+      <script>
+        function  logout(){
+window.location='logout2.php';
+            
+                }
+        
+    </script>
       
   </head>
 
   <body onload= "getDate();ManageMedicine()">
       
 
-    <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.php" ><img src="img/logo.png" height= 80 px; width= 300px; style=" top: 0; left:0; position: absolute" alt= "SmartMed logo"></a>
+ <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container-fluid">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ">
+              
+              
+            <li class="nav-item">
+              <a class="nav-link" >hello
+              <?php
+              
+
+              if( !isset($_SESSION['currentName']) ){
+                            echo "user";
+                            }
+                else{
+                echo $_SESSION['currentName'];
+                ?>
+                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
+                <?php
+                } 
+                ?>
+
+              </a>
+            </li>
+            </ul>
+            
+            <ul class= "navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home</a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="signin.php">Sign in</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="YourAccount.php">My Account</a>
+              <a class="nav-link" id = "account" href="YourAccount.php">My Account</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("account").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
             </li>
 			<li class="nav-item">
               <a class="nav-link" href="Contact us.php">Contact us</a>
             </li>
+            
           </ul>
+           <ul class= "navbar-nav ml-auto">
+               </ul>
+                          <ul class= "navbar-nav ml-auto">
+               </ul>
         </div>
       </div>
     </nav>
@@ -139,19 +185,28 @@ if ($conn->connect_error) {
 		<p id="form2"> 
 		<!--choose a drug name-->
 		<div>
-		Please enter a medicine you would like to remove:   <br> <br>
+		Please select a medicine you would like to remove:   <br> <br>
 <?php
              if ($resultCurrentDrugs1->num_rows > 0) { 
              ?>
-    	 <select value="DrugWanted" name="DrugWantedDelete" size="1" required>
+    	 <select value="DrugWanted" name="DrugWantedDelete" size="1" required> 
           <option value="" disabled selected>A medicine to remove </option>
 <?php
         while($row = $resultCurrentDrugs1->fetch_assoc()) {
         echo '<option name="'.$row['DrugName'].'"> '.$row['DrugName'].' </option>'; }
+        ?>
+          </select>
+         <input type = "submit" class="btn-primary btn" id= "button1" value ="Delete Medicine">
+        <?php
+             }
+             
+             else{ 
+                echo "There are no medicines for this device"; ?>
+                <input type = "submit" value ="Delete Medicine" style="display:none">
+ <?php
              }
              ?>
-            </select>
-            <input type = "submit" value ="Delete Medicine">
+          
 
 	</form><br><br></div></div>
 		
@@ -162,19 +217,23 @@ if ($conn->connect_error) {
           <h2 ><center> Insert New Medicine</center> </h2>
         <p> Please enter a new medicine you would like to add: </p>
           <form action= "#" method="get" style="width:80%;height:400px" >
-       <input type="text" size="23 class="form-control" placeholder="Medicine Name" id="DrugName" name="DrugName" required data-validation-required-message="Please enter the medicine name.">
+       <input type="text" size="20 class="form-control" placeholder="Medicine Name" id="DrugName" name="DrugName" required data-validation-required-message="Please enter the medicine name.">
 
-		 <input type= "submit" value="Add Medicine"> 
+		 <input type= "submit" class="btn-primary btn" value="Add Medicine"> 
 		 
 		   <?php
 		    if ($_GET){
+		 $getDrugsName2="SELECT DrugName,CellID FROM UserDrugs WHERE UserDrugs.DeviceID=$personalDeviceId";
+        $resultCurrentDrugs2 = $conn->query($getDrugsName2);
 		   $flag=0;
 		   $NewDrugName=$_GET['DrugName'];
-		   if ($resultCurrentDrugs1->num_rows > 0){
-		      while($row = $resultCurrentDrugs1->fetch_assoc()) {
-		          if($NewDrugName==$row['DrugName']){
-		              echo "this medicine is already exists";
-		              echo "<br>";
+
+		   if ($resultCurrentDrugs2->num_rows > 0){
+		    while($row2 = $resultCurrentDrugs2->fetch_assoc()) {
+		          if($NewDrugName==$row2['DrugName']){
+
+         $message = "This medicine is already exists" ;
+echo "<script type='text/javascript'>alert('$message');          window.location = 'http://shaniru.mtacloud.co.il/ManageMedicine.php'</script>";
 		              $flag=1;
 		              break;
 		          }
@@ -192,29 +251,42 @@ if ($conn->connect_error) {
 
 //saving the rxcui number for the Drug 
 		$idDrug=$IdArray['idGroup']['rxnormId'];
+	
 		
 		      if ($resultCellStatus->num_rows > 0){
 		      $NewCellrow = $resultCellStatus->fetch_assoc();
 		      	$NewCell=$NewCellrow['CellID'];
-		   echo "<br>";
-		   }
-		   else "There is no free cell to add the medicine";
-		   
-       $sqlUpdateCellID =  "UPDATE Cell SET IfEmpty=0 WHERE $NewCell = CellID AND $personalDeviceId= DeviceID";
-      $resultUpdateCellID = $conn->query($sqlUpdateCellID);
-      
+		      	
+
+      if($idDrug>0 ){
  $sqlInsertUserDrug="INSERT INTO UserDrugs (DrugID, DrugName, DeviceID, CellID) VALUES ('".$idDrug."','".$NewDrugName."','".$personalDeviceId."', '".$NewCell."')";
 
 $resultInsertUserDrug = $conn->query($sqlInsertUserDrug);
+          
+          
+      $sqlUpdateCellID =  "UPDATE Cell SET IfEmpty=0 WHERE $NewCell = CellID AND $personalDeviceId= DeviceID";
+      $resultUpdateCellID = $conn->query($sqlUpdateCellID);
+$message = "This medicine can be added to your device! Enter the pills to cell number: ".$NewCell. "";
+echo "<script type='text/javascript'>alert('$message');       
+window.location = 'http://shaniru.mtacloud.co.il/ManageMedicine.php'</script>";
 
-      if($resultInsertUserDrug && $resultUpdateCellID){
-          	echo "This medicine can be added to your device! <br>";
-            echo "Enter the pills to cell number: ".$NewCell. "" ;
 
       }
+      
       else{
-          echo "Invalid medicine name";
+          $message = "Invalid medicine name";
+        echo "<script type='text/javascript'>alert('$message');
+          window.location = 'http://shaniru.mtacloud.co.il/ManageMedicine.php'</script>";
+
       }
+   
+		   }
+		   else{
+		    $message = "There is no free cell to add the medicine";
+echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il/ManageMedicine.php'</script>";
+
+
+		   }
  } 
 		    }
         ?>
@@ -254,11 +326,16 @@ $resultInsertUserDrug = $conn->query($sqlInsertUserDrug);
             $resultFreeCell = $conn->query($sqlFreeCell);
             
             
-            if ($resultDeletetUserDrug )
-            echo "Successfully deleted the drug : $DrugWantedDelete" ;
-         
-         else
-           echo "Failed to delete the drug : $DrugWantedDelete" ;
+            if ($resultDeletetUserDrug ){
+		    $message = "Successfully deleted the drug : $DrugWantedDelete";
+echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il/ManageMedicine.php'</script>";
+
+            }
+         else{
+         $message = "Failed to delete the drug : $DrugWantedDelete" ;
+echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il/ManageMedicine.php'</script>";
+
+         }
 }
       ?>
 
@@ -270,22 +347,22 @@ $resultInsertUserDrug = $conn->query($sqlInsertUserDrug);
 	</div>  
     <hr>
     
-    <!-- Footer -->
+       <!-- Footer -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <ul class="list-inline text-center">
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.linkedin.com/home">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
                   </span>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.facebook.com/">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -293,7 +370,7 @@ $resultInsertUserDrug = $conn->query($sqlInsertUserDrug);
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://github.com/orgs/SmartMed2018/dashboard">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -301,16 +378,10 @@ $resultInsertUserDrug = $conn->query($sqlInsertUserDrug);
                 </a>
               </li>
             </ul>
-            <p class="copyright text-muted">Copyright &copy; SmartMed team 2018</p>          </div>
+            <p class="copyright text-muted">Copyright &copy; SmartMed team 2018</p>
+          </div>
         </div>
       </div>
-      
-
-      <div id ="insert">
-          
-      </div>
-      
-      
     </footer>
 
     <!-- Bootstrap core JavaScript -->
