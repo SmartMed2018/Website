@@ -47,8 +47,6 @@ $mail->Subject = 'Pills status in Device: '.$rowFlag['DeviceID'];
 $mail->Body.=    "Hello " .$rowFlag['Name']."\n";
 $mail->Body.=    "The following cells have less then 5 pills:\n";
 $resultGetRealAmount = $conn->query($sqlGetRealAmount);
-echo "the first rowflag 1 ".$rowFlag['Email'];
-	           echo "<br>";
 
 	   while($row = $resultGetRealAmount->fetch_assoc())
 	   {
@@ -69,6 +67,9 @@ echo "the first rowflag 1 ".$rowFlag['Email'];
 	           
 	           if($i==$num_rows)
 	           {
+	               
+                    $mail->Body.=    "\n good day, \n ";
+                    $mail->Body.=    "SmartMed \n";
 	               	  if ($mail->send()){
     	              echo "Mail sent ".$rowFlag['Email'];
     	                echo "<br>";	   
@@ -83,9 +84,11 @@ echo "the first rowflag 1 ".$rowFlag['Email'];
 	       }
 	       
 	       else{
-	           if ($mail->send()){
-    	              echo "Mail sent ".$rowFlag['Email'];
-    	              	           echo "<br>";	   
+                    $mail->Body.=    "\n good day, \n ";
+                    $mail->Body.=    "SmartMed \n";	           
+	                if ($mail->send()){
+    	                 echo "Mail sent ".$rowFlag['Email'];
+    	                	           echo "<br>";	   
 
 	           }
     	        if (!$mail->send()){
@@ -113,6 +116,7 @@ echo "the first rowflag 1 ".$rowFlag['Email'];
             $mail->Body.=    "The following cells have less then 5 pills:\n";
 $mail->Body.=    "The medicine ". $rowFlag['DrugName']. " has ".$rowFlag['PillAmount']. " pills in cell number  ".$rowFlag['CellID']; 
 
+
 	           echo "the while ".$row['DrugName'];
 	           echo "<br>";
 	           echo "the while row ".$row['Email'];
@@ -125,6 +129,8 @@ $mail->Body.=    "The medicine ". $rowFlag['DrugName']. " has ".$rowFlag['PillAm
 	           echo $num_rows;
 	           if($i==$num_rows)
 	           {
+                    $mail->Body.=    "\n good day, \n ";
+                    $mail->Body.=    "SmartMed \n";	               
 	               	  if ($mail->send()){
     	              echo "Mail sent ".$rowFlag['Email'];
     	              	           echo "<br>";	   
@@ -142,28 +148,6 @@ $mail->Body.=    "The medicine ". $rowFlag['DrugName']. " has ".$rowFlag['PillAm
 	   
 	  }//if the numrows>0
  
- 
- 
- 
- 
- 
- 
- 
- 
-             
-            
-            
-            
-            
-            
-            
-    	/*       echo "the else row ".$row['Email'];
-	           echo "<br>";
-	           echo "the else rowflag ".$rowFlag['Email'];
-	           echo "<br>";	         
-	           echo "<br>";	   
-            echo "the new mailadress ".   $mail->Subject();            
-              echo "the new mailadress ".  $mail->addAddress();*/
 
 ?>
 
