@@ -173,13 +173,18 @@ window.location='logout2.php';
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto ">
 		<form style="width: 140%;" action="server1">
-	     <i class="asd" onclick="AddNewAlert()"> Add New Alert &nbsp;</i>
+	     <i class="asd" onclick="AddNewAlert()">   
+	     <img src="img/Addnewalert.png" alt="HTML tutorial" style="width:170px;height:110px;border:solid black 2px;">
+ &nbsp;</i>
 			
-         <i class="asd" onclick="CheckAmount()"> Check amount &nbsp;</i>
+         <i class="asd" onclick="CheckAmount()"> 	
+         <img src="img/CheckAMount.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> &nbsp;</i>
 			
-         <i class="asd" onclick="PillTakingStatus()"> Pill taking Status </i>
+         <i class="asd" onclick="PillTakingStatus()"> 	
+         <img src="img/PillStatus.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
          
-         <i class="asd" onclick="ManageMedicine()"> Manage Medicines </i>
+         <i class="asd" onclick="ManageMedicine()"> 
+         <img src="img/ManageMedicin.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
 
 		</form>
     </div>
