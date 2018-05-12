@@ -100,7 +100,7 @@ window.location='logout2.php';
               
 
               if( !isset($_SESSION['currentName']) ){
-                            echo "user";
+                            echo "GUEST";
                             }
                 else{
                 echo $_SESSION['currentName'];
@@ -174,7 +174,7 @@ window.location='logout2.php';
         <div class="col-lg-8 col-md-10 mx-auto ">
 		<form style="width: 140%;" action="server1">
 	     <i class="asd" onclick="AddNewAlert()">   
-	     <img src="img/Addnewalert.png" alt="HTML tutorial" style="width:170px;height:110px;border:solid black 2px;">
+	     <img src="img/Addnewalert.png" alt="HTML tutorial" style="width:170px;height:110px">
  &nbsp;</i>
 			
          <i class="asd" onclick="CheckAmount()"> 	
