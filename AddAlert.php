@@ -239,23 +239,8 @@ window.location='logout2.php';
     <!-- Main Content -->
     <div class="container-fluid>
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto ">
-        <form style="width: 125%;" action="server1">
-	     <i class="asd" onclick="AddNewAlert()">   
-	     <img src="img/Addnewalert.png" alt="HTML tutorial" style="width:170px;height:110px">
-             &nbsp;</i>
-			
-         <i class="asd" onclick="CheckAmount()"> 	
-         <img src="img/CheckAMount.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> &nbsp;</i>
-			
-         <i class="asd" onclick="PillTakingStatus()"> 	
-         <img src="img/PillStatus.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
-         
-         <i class="asd" onclick="ManageMedicine()"> 
-         <img src="img/ManageMedicin.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
-
-		</form>
-		
+        <div class="col-lg-8 col-md-10 mx-auto "><br>
+        <h1><center> Add New Alert </center></h1>
 
               
 		<form name = "myForm" action="#" method="get">
