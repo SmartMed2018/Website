@@ -33,15 +33,29 @@ if ($conn->connect_error) {
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+      <!--
+      
+      
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    -->
+
 
     <!-- Custom styles for this template -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
+   
+     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     
-   <link rel="stylesheet" href="css/foofoo.css">
+   <link rel="stylesheet" href="css/loginForm.css">
+   <link rel="stylesheet" href="css/indexStl.css">
+    
     
     <script>
         function  logout(){
@@ -64,17 +78,17 @@ window.location='logout2.php';
 
   <body>
 
-        <!-- Navigation -->
+               <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container-fluid">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ">
-      
+              
               
             <li class="nav-item">
               <a class="nav-link" >hello
@@ -82,7 +96,9 @@ window.location='logout2.php';
               
 
               if( !isset($_SESSION['currentName']) ){
-                            echo "user";
+                            echo "GUEST";
+                echo '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
+                    ';
                             }
                 else{
                 echo $_SESSION['currentName'];
@@ -98,20 +114,17 @@ window.location='logout2.php';
             
             <ul class= "navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.php">Home</a>
+              <a class="nav-link" href="index.php">Smartmed</a>
             </li>
             
-            <li class="nav-item">
-              <a class="nav-link" href="signin.php">Sign in</a>
-            </li>
             
-            <li class="nav-item">
-              <a class="nav-link" id = "account" href="YourAccount.php">My Account</a>
+           <li class="nav-item">
+              <a class="nav-link" id = "ana" href="AddAlert.php">Add New alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
                     <script type="text/javascript">
-                    document.getElementById("account").style.display = "none";
+                    document.getElementById("ana").style.display = "none";
                         </script>
                     <?php
                             }
@@ -119,8 +132,50 @@ window.location='logout2.php';
               ?>
               
             </li>
-			<li class="nav-item">
-              <a class="nav-link" href="Contact us.php">Contact us</a>
+            
+             <li class="nav-item">
+              <a class="nav-link" id = "amount" href="Amount.php">Check amount</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("amount").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
+            </li>
+            
+             <li class="nav-item">
+              <a class="nav-link" id = "tracking" href="Tracking.php">Tracking stats</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("tracking").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
+            </li>
+            
+             <li class="nav-item">
+              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage medicine</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("manage").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
             </li>
             
           </ul>
@@ -139,58 +194,171 @@ window.location='logout2.php';
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="site-heading">
-              <h1>SmartMed</h1>
-              <span class="subheading" id="sub">Your Friendly Neighborhood Pill Reminder</span>
+              
             </div>
           </div>
         </div>
       </div>
     </header>
 
- 
-		 
-         <div class="post-preview text-center" >
-			<p><b><cetner> SmartMed Helps you take medication in an orderly manner,<br>
-			it will remind you of the medications and inform your contact of current updates.</center></b></p>
+        <h1 class = "stl1">SmartMed</h1>
 			
-			<img src= "https://medqpillbox.com/wp-content/uploads/2017/10/pill-box-with-flashing-play-1-1.gif" alt="SmardMed device" height="300" width=300" class="img-rounded"> <br><br>
-			<b><p><center>What are our goals?</center></p></b>
         <div class="container">
-        <div class="row">
-           <div class="col-md-3">  Reduce medication discontinuation </div>
-           <div class="col-md-3"> Allow the contact to monitor the taking of drugs, the stock of pills and the treatment of a common case. </div>
-            <div class="col-md-3"> Improve the life of taking medication </div>
-            <div class="col-md-3"> Allow the drug user a free life without thinking about the common use of medications </div>
-            <br><br>
-
-
-		  </div>	
-             <p><b> <center>How It Works?</center></b></p>
-             Buy a "SmartMed" device at the pharmacies. <br>
-Connect to the site using the ID number that appears behind the device.<br>
-Add medications and alerts, keep track of the medication. <br>
-Get alerted on the device on time to take a ball. <br>
-After taking the ball, push the button so everyone knows that the ball is taken and no one will worry! <br>
-
-  <p> <b><center>What is special about us?</center></b></p>
-        <div class="row">
-         <div class="col-md-3">When an alert is added, a check is conducted with the international drug store to prevent the taking of parallel drugs that are dangerous to take together.</div>
-       <div class="col-md-3">  Managing inventory through the website, receiving updates to the email if the medication is about to run out.</div>
-        <div class="col-md-3"> An update on non-taking if the drug was not taken for half an hour.</div>
-        <div class="col-md-3"> A friendly, small and comfortable device.</div>
-        </div>
+            
+            <p style="text-align: left;"><b> SmartMed, The new smart pill taking system that Helps you<br> take medication in an orderly manner,<br>
+			smartmed will let you know when its medication taking time<br> and inform your contact of current updates.</b></p>
+			
+			<img src= "https://medqpillbox.com/wp-content/uploads/2017/10/pill-box-with-flashing-play-1-1.gif" alt="SmardMed device" height="200" width="250" class="img1"> <br>
+			<hr>
         
-             <b> <p><center>About us</center></p></b>
-         <div class="row">
-               <div class="col-md-4">Ido Keynan <br> Student Information Systems at Tel Aviv University, wears tabula socks .</div>
-                <div class="col-md-4">Shani Reuveni <br> Student Information Systems at Tel Aviv University, PMO IT - "Strauss Water" Company.</div>
-                 <div class="col-md-4">Adam Kobo <br> Student Information Systems at Tel Aviv University, </div>
+     <div class="panel-group">
+     
+    <div class="panel panel-primary">
+      <div class="panel-heading" id="stl2">What are our goals?</div>
+      <div class="panel-body">
+      <div class="col-md-65">  
+        +Reduce medication discontinuation<br>
+        +Enable drug tracking and inventory management<br>
+        +Improve the patient life<br>
+        +Allows the patient a worry-free day regarding his or her medications. </div>
+          </div>
+        </div>
+       </div>  
+       
+       <hr>
+            <div class="panel panel-primary">
+
+      <div class="panel-heading" id="stl2">How does it work?</div>
+      <div class="panel-body " style= "text-align:left">
+      <i style="font-size:20px" class="fa">&#xf0fe;</i>
+      Buy a "SmartMed" device at the pharmacies. <br>
+      <i style="font-size:20px" class="fa">&#xf0fe;</i>
+Connect to the site using the ID number that appears behind the device.<br>
+<i style="font-size:20px" class="fa">&#xf0fe;</i>
+Add medications and alerts, keep track of the medication. <br>
+<i style="font-size:20px" class="fa">&#xf0fe;</i>
+Get alerted on the device itself when it the time to take the pill. <br>
+<i style="font-size:20px" class="fa">&#xf0fe;</i>
+After taking the pill, press the button so everyone will know that the pill was taken and no one will be worried!<br>
+      
+      </div>
+    </div>
+<hr>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading" id="stl2">What makes us so special?</div>
+      <div class="panel-body">
+      
+      <div class="col-md-6">+ An automatic test during adding a alert is being conducted with the US National Library of Medicine to prevent the taking of medicines that should not be taken together. </div>
+           <div class="col-md-6">+ Managing inventory through the website, receiving email notifications if the medication is about to run out. </div>
+            <div class="col-md-6">+ sending an email notification if the medicine was not taken 30 minutes after the alert</div>
+            <div class="col-md-6">+ A friendly, small and comfortable device. Easy to use for all ages</div>
+      
       </div>
     </div>
     
+    <hr>
 
-    
+    <div class="panel panel-primary">
+      <div class="panel-heading" id="stl2">About the initiators </div>
+      <center><div class="panel-body">
+      
+      <div id="b"><b>Ido Keynan</b><br>I.S Student at MTA<br> Segmentation Specialist- Taboola   </div>
+      <div id="b"><b>Shani Reuveni</b><br>
+           I.S Student at MTA<br> PMO IT - Strauss Water</div>
+      <div id="b"><b>Adam Kobo</b><br>
+            I.S Studentat MTA<br> QA Engineer - Hola </div>
 
+      
+      </div>
+      </center>
+    </div>
+       </div> 
+        
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <!-- login -->
+      <div class="modal-body">
+      <div class="form">
+      
+      <ul class="tab-group">
+        <li class="tab "><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        
+      </ul>
+      
+      <div class="tab-content">
+        <div id="signup">   
+          
+          <form action="/index.php" method="get">
+          
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                Device Id<span class="req">*</span>
+              </label>
+              <input type="text" name="DeviceId" min="1000" max="100000" required data-validation-required-message="Please enter your Deivce id." required autocomplete="off" />
+            </div><br>
+        
+            <div class="field-wrap">
+              <label>
+                Email<span class="req">*</span>
+              </label>
+              <input type="email" name="Email" required autocomplete="off"/>
+            </div>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Full Name<span class="req">*</span>
+            </label>
+            <input type="text" name="FullName"required autocomplete="off"/>
+          </div>
+          
+          <button type="submit" class="button button-block"/>Sign up</button>
+          </form>
+
+        </div>
+        
+        <div id="login">   
+          
+          <form action="/index.php" method="post">
+          
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email" name="Email" required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Device ID<span class="req">*</span>
+            </label>
+            <input type="text" name="DeviceId" required autocomplete="off"/>
+          </div>
+                    
+          <button class="button button-block"/>Log In</button>
+          
+          </form>
+
+        </div>
+	    </div>
+	 </div>
+	 </div>
+		              </div>
+		                            </div>
+
+    </div>
+    </div>
+    </div>
+
+  </div>
+</div>
 
 
 <?php
@@ -198,34 +366,48 @@ if ($_GET)
 {
     $newBoxID = $_GET['DeviceId'];
     $newName = $_GET['FullName'];
-    $newEmail = $_GET['email'];
+    $newEmail = $_GET['Email'];
+//ולידציה אם יש מכשיר כזה בכלל
+    $ValidationIfExistsql = "SELECT * FROM Device WHERE DeviceID='$newBoxID'";
+    $ValidationIfExistsResult = $conn->query($ValidationIfExistsql);
+	if ($ValidationIfExistsResult->num_rows == 0) {
+					    $message = "This Device id does not exists";
+             echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
+				exit();
+			}
 
+    else{
+//ולידציה אם המכשיר כבר קיים
     $ValidationIDsql = "SELECT * FROM Users WHERE DeviceID='$newBoxID'";
 			$ChekingValidResult = $conn->query($ValidationIDsql);
 	        	if ($ChekingValidResult->num_rows > 0) {
-					    $message = "this device is already exists";
-                    echo "<script type='text/javascript'>alert('$message');</script>";
+					    $message = "This device is already exists";
+             echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
+				exit();
 			} 
 			else{
 			     $sqlInsertNewUser="INSERT INTO Users (DeviceID, Name, Email) VALUES ($newBoxID,'$newName','$newEmail')";
-$resultInsertNewUser = $conn->query($sqlInsertNewUser);
+                $resultInsertNewUser = $conn->query($sqlInsertNewUser);
 
       if($resultInsertNewUser){
-          	echo "Welcome to SmartMed! <br>";
+                for($i=1;$i<=7;$i++){
+                     $sqlInsertNewCells="INSERT INTO Cell (CellID, PillAmount, IfEmpty,DeviceID) VALUES ($i,0,1,$newBoxID)";
+                    $resultInsertNewCells = $conn->query($sqlInsertNewCells);
+            }
+					    $message = "Welcome to SmartMed!";
+             echo "<script type='text/javascript'>alert('$message');</script>";
       }
-      else
-      echo "Something got wrong, please try again";
       
-      for($i=1;$i<=7;$i++)
-      {
-         $sqlInsertNewCells="INSERT INTO Cell (CellID, PillAmount, IfEmpty,DeviceID) VALUES ($i,0,1,$newBoxID)";
-            $resultInsertNewCells = $conn->query($sqlInsertNewCells);
-      }
-          
+      else{
+			 $message = "Something went wrong";
+             echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
+				exit();      
+         }
+ 
       }
 
 }
-
+}
 			
 
 
@@ -241,7 +423,7 @@ $resultInsertNewUser = $conn->query($sqlInsertNewUser);
 			$ChekingDataResult = $conn->query($ChekingDatasql);
 	        	if ($ChekingDataResult->num_rows < 1) {
 					    $message = "One or more of the details is not correct";
-                    echo "<script type='text/javascript'>alert('$message');</script>";
+             echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
 				exit();
 			} 
 			
@@ -258,7 +440,9 @@ $resultInsertNewUser = $conn->query($sqlInsertNewUser);
 					echo "name is ".$_SESSION['currentName'];
 					echo "<br>";
 					echo "name is ".$_SESSION['CurrentEmail'];
-					echo "<br>";					
+					echo "<br>";
+					header("Location: ./index.php");
+					
 				}
 				}    
 
@@ -266,21 +450,22 @@ $resultInsertNewUser = $conn->query($sqlInsertNewUser);
     <hr>
 
     <!-- Footer -->
+          <!-- Footer -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <ul class="list-inline text-center">
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.linkedin.com/home">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
                   </span>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.facebook.com/">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -288,7 +473,7 @@ $resultInsertNewUser = $conn->query($sqlInsertNewUser);
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://github.com/orgs/SmartMed2018/dashboard">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -296,7 +481,7 @@ $resultInsertNewUser = $conn->query($sqlInsertNewUser);
                 </a>
               </li>
             </ul>
-            <p class="copyright text-muted">Copyright &copy; SmartMed team 2018</p>
+            <p class="copyright text-muted">For contact: noreply.smartmed@gmail.com <br> Copyright &copy; SmartMed team 2018</p>
           </div>
         </div>
       </div>
@@ -308,6 +493,8 @@ $resultInsertNewUser = $conn->query($sqlInsertNewUser);
 
     <!-- Custom scripts for this template -->
     <script src="js/clean-blog.min.js"></script>
+        <!-- File to handle Navigation on login modal -->
+        <script  src="js/loginForm.js"></script>
 
     <script>
   /*  function myFunction() {

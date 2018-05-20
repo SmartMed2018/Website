@@ -63,8 +63,6 @@ if ($conn->connect_error) {
     
     <link href="css/asd.css" rel="stylesheet" type="text/css">
 
-
-   <link rel="stylesheet" href="css/foofoo.css">
       <script>
         function  logout(){
 window.location='logout2.php';
@@ -96,7 +94,7 @@ window.location='logout2.php';
               
 
               if( !isset($_SESSION['currentName']) ){
-                            echo "user";
+                            echo "GUEST";
                             }
                 else{
                 echo $_SESSION['currentName'];
@@ -112,20 +110,16 @@ window.location='logout2.php';
             
             <ul class= "navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.php">Home</a>
+              <a class="nav-link" href="index.php">Smartmed</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="signin.php">Sign in</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" id = "account" href="YourAccount.php">My Account</a>
+              <a class="nav-link" id = "ana" href="AddAlert.php">Add New alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
                     <script type="text/javascript">
-                    document.getElementById("account").style.display = "none";
+                    document.getElementById("ana").style.display = "none";
                         </script>
                     <?php
                             }
@@ -133,9 +127,52 @@ window.location='logout2.php';
               ?>
               
             </li>
-			<li class="nav-item">
-              <a class="nav-link" href="Contact us.php">Contact us</a>
+            
+             <li class="nav-item">
+              <a class="nav-link" id = "amount" href="Amount.php">Check amount</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("amount").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
             </li>
+            
+             <li class="nav-item">
+              <a class="nav-link" id = "tracking" href="Tracking.php">Tracking stats</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("tracking").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
+            </li>
+            
+             <li class="nav-item">
+              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage medicine</a>
+               <?php
+              if( !isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("manage").style.display = "none";
+                        </script>
+                    <?php
+                            }
+
+              ?>
+              
+            </li>
+
             
           </ul>
            <ul class= "navbar-nav ml-auto">
@@ -147,7 +184,7 @@ window.location='logout2.php';
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('img/Account-bg.jpg')">
+    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -164,16 +201,21 @@ window.location='logout2.php';
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto ">
-		<form style="width: 140%;" action="server1">
-	     <i class="asd" onclick="AddNewAlert()"> Add New Alert &nbsp;</i>
+	
+		<form style="width: 125%;" action="server1">
+	     <i class="asd" onclick="AddNewAlert()">   
+	     <img src="img/Addnewalert.png" alt="HTML tutorial" style="width:170px;height:110px">
+ &nbsp;</i>
 			
-         <i class="asd" onclick="CheckAmount()"> Check amount &nbsp;</i>
+         <i class="asd" onclick="CheckAmount()"> 	
+         <img src="img/CheckAMount.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> &nbsp;</i>
 			
-         <i class="asd" onclick="PillTakingStatus()"> Pill taking Status </i>
+         <i class="asd" onclick="PillTakingStatus()"> 	
+         <img src="img/PillStatus.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
          
-         <i class="asd" onclick="ManageMedicine()"> Manage Medicines </i>
-
-		</form><br></div></div>
+         <i class="asd" onclick="ManageMedicine()"> 
+         <img src="img/ManageMedicin.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
+		</form>
 
       <div class="row">
           	 <div class="col-md-1">
@@ -202,6 +244,7 @@ window.location='logout2.php';
              
              else{ 
                 echo "There are no medicines for this device"; ?>
+                
                 <input type = "submit" value ="Delete Medicine" style="display:none">
  <?php
              }
@@ -216,7 +259,7 @@ window.location='logout2.php';
           <br><div class="col-md-5">
           <h2 ><center> Insert New Medicine</center> </h2>
         <p> Please enter a new medicine you would like to add: </p>
-          <form action= "#" method="get" style="width:80%;height:400px" >
+          <form action= "#" method="get" style="width:80%" >
        <input type="text" size="20 class="form-control" placeholder="Medicine Name" id="DrugName" name="DrugName" required data-validation-required-message="Please enter the medicine name.">
 
 		 <input type= "submit" class="btn-primary btn" value="Add Medicine"> 
@@ -348,7 +391,7 @@ echo "<script type='text/javascript'>alert('$message');window.location = 'http:/
     <hr>
     
        <!-- Footer -->
-    <footer>
+        <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
@@ -378,11 +421,12 @@ echo "<script type='text/javascript'>alert('$message');window.location = 'http:/
                 </a>
               </li>
             </ul>
-            <p class="copyright text-muted">Copyright &copy; SmartMed team 2018</p>
+            <p class="copyright text-muted">For contact: noreply.smartmed@gmail.com <br> Copyright &copy; SmartMed team 2018</p>
           </div>
         </div>
       </div>
     </footer>
+
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
