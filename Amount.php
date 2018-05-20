@@ -135,7 +135,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "tracking" href="Tracking.php">Tracking stats</a>
+              <a class="nav-link" id = "tracking" href="Tracking.php">Tracking status</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -190,22 +190,10 @@ window.location='logout2.php';
     <!-- Main Content -->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto ">
+        <div class="col-lg-8 col-md-10 mx-auto "><br>
 	
-		<form style="width: 125%;" action="server1">
-	     <i class="asd" onclick="AddNewAlert()">   
-	     <img src="img/Addnewalert.png" alt="HTML tutorial" style="width:170px;height:110px">
- &nbsp;</i>
-			
-         <i class="asd" onclick="CheckAmount()"> 	
-         <img src="img/CheckAMount.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> &nbsp;</i>
-			
-         <i class="asd" onclick="PillTakingStatus()"> 	
-         <img src="img/PillStatus.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
-         
-         <i class="asd" onclick="ManageMedicine()"> 
-         <img src="img/ManageMedicin.png" alt="HTML tutorial" style="width:170px;height:110px;border:2;"> </i>
-		</form>
+        <h1><center> Check Amount </center></h1>
+
 		
 </div>
 </div>
