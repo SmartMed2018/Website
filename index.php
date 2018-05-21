@@ -89,33 +89,12 @@ window.location='logout2.php';
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ">
               
+        <li class="nav-item">
+              <a class="nav-link"  href="index.php"><img src="img/logo2.png" height="80%" width="200px" alt="SmartMed logo" align="left"></a>
               
-            <li class="nav-item">
-              <a class="nav-link" >hello
-              <?php
-              
-
-              if( !isset($_SESSION['currentName']) ){
-                            echo "GUEST";
-                echo '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
-                    ';
-                            }
-                else{
-                echo $_SESSION['currentName'];
-                ?>
-                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
-                <?php
-                } 
-                ?>
-
-              </a>
             </li>
-            </ul>
-            
-            <ul class= "navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.php">Smartmed</a>
-            </li>
+
+
             
             
            <li class="nav-item">
@@ -149,7 +128,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "tracking" href="Tracking.php">Tracking stats</a>
+              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking status</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -178,11 +157,36 @@ window.location='logout2.php';
               
             </li>
             
+                        <li class="nav-item" >
+              <a class="nav-link"  >hello
+              <?php
+              
+
+              if( !isset($_SESSION['currentName']) ){
+                            echo "GUEST";
+                echo '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
+                    ';
+                            }
+                else{
+                echo $_SESSION['currentName'];
+                ?>
+                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
+                <?php
+                } 
+                ?>
+
+              </a>
+            </li>
+            </ul>
+            
+            <ul class= "navbar-nav ml-auto">
+                
           </ul>
            <ul class= "navbar-nav ml-auto">
                </ul>
                           <ul class= "navbar-nav ml-auto">
                </ul>
+                
         </div>
       </div>
     </nav>
