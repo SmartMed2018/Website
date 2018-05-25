@@ -1,20 +1,16 @@
 <?php
 // Start the session
 session_start();
-
-
  $servername = "zebra";
 $username = "shaniru";
 $password = "sbbzL9TnK^1Y";
 $dbname = "shaniru_Drugs";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
-
 ?>
 
 <!DOCTYPE html>
@@ -40,11 +36,6 @@ if ($conn->connect_error) {
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       
-      <!--
-      
-      
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    -->
 
 
     <!-- Custom styles for this template -->
@@ -66,12 +57,12 @@ window.location='logout2.php';
     </script>
     
         <style>
+        i{color:#17a2b8};
      @media only screen and (max-width:992px) {
     /* For tablets: */
-  #sub{
+  #logo, #space1 , #space2{
 	  display:none;
   }
-
  }
  </style>
   </head>
@@ -89,25 +80,50 @@ window.location='logout2.php';
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ">
               
-        <li class="nav-item">
-              <a class="nav-link"  href="index.php"><img src="img/logo2.png" height="80%" width="200px" alt="SmartMed logo" align="left"></a>
+            <li class="nav-item">
+
+              <a class="nav-link"  href="index.php"><img src="img/logo2.png" height="80%" width="250px" id = "logo" top="6px" poisition= fixed left = "0px" alt="SmartMed logo" ></a>
+              </li>
+              
+             <li class="nav-item" id = "space1">
+                 <a class="nav-link">
+         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  </a>
+               <?php
+              if( isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("space1").style.display = "none";
+                        </script>
+                    <?php
+                            }
+              ?>
               
             </li>
-
-
             
+                          <li class="nav-item" id = "space2">
+           &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+               <?php
+              if( isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("space2").style.display = "none";
+                        </script>
+                    <?php
+                            }
+              ?>
+              
+            </li>        
             
            <li class="nav-item">
-              <a class="nav-link" id = "ana" href="AddAlert.php">Add New alert</a>
+              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
                     <script type="text/javascript">
-                    document.getElementById("ana").style.display = "none";
+                    document.getElementById("AddAlert").style.display = "none";
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
@@ -122,7 +138,6 @@ window.location='logout2.php';
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
@@ -137,13 +152,12 @@ window.location='logout2.php';
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage medicine</a>
+              <a class="nav-link center" id = "manage" href="ManageMedicine.php">Manage medicine</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -152,7 +166,6 @@ window.location='logout2.php';
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
@@ -161,7 +174,6 @@ window.location='logout2.php';
               <a class="nav-link"  >hello
               <?php
               
-
               if( !isset($_SESSION['currentName']) ){
                             echo "GUEST";
                 echo '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
@@ -170,7 +182,7 @@ window.location='logout2.php';
                 else{
                 echo $_SESSION['currentName'];
                 ?>
-                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
+                <button type="button" class = "btn btn-info btn-lg" style= "text-font: 12px"  onClick="logout()">Log Out</button>
                 <?php
                 } 
                 ?>
@@ -179,14 +191,6 @@ window.location='logout2.php';
             </li>
             </ul>
             
-            <ul class= "navbar-nav ml-auto">
-                
-          </ul>
-           <ul class= "navbar-nav ml-auto">
-               </ul>
-                          <ul class= "navbar-nav ml-auto">
-               </ul>
-                
         </div>
       </div>
     </nav>
@@ -194,37 +198,32 @@ window.location='logout2.php';
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/home-bg.jpg')">
       <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="site-heading">
-              
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </header>
-
-        <h1 class = "stl1">SmartMed</h1>
 			
         <div class="container">
             
-            <p style="text-align: left;"><b> SmartMed, The new smart pill taking system that Helps you<br> take medication in an orderly manner,<br>
-			smartmed will let you know when its medication taking time<br> and inform your contact of current updates.</b></p>
-			
-			<img src= "https://medqpillbox.com/wp-content/uploads/2017/10/pill-box-with-flashing-play-1-1.gif" alt="SmardMed device" height="200" width="250" class="img1"> <br>
-			<hr>
+            <p style="text-align: left;"><b> <span style="color:#17a2b8; font-size: 40px">SmartMed</span>, The new smart pill taking system that Helps you<br> take medication in an orderly manner,<br>
+			smartmed will let you know when its medication taking time<br> and 
+			inform your contact of current updates.</b></p>            
+            
+    <div>
+        	 			<img src="img/PIC1.jpeg" alt="SmardMed device" width="200px" heigth="250px" class="img1">   
+    
+    </div>
+		
+			<hr style="margin-top:7rem;">
         
      <div class="panel-group">
      
     <div class="panel panel-primary">
-      <div class="panel-heading" id="stl2">What are our goals?</div>
-      <div class="panel-body">
-      <div class="col-md-65">  
-        +Reduce medication discontinuation<br>
-        +Enable drug tracking and inventory management<br>
-        +Improve the patient life<br>
-        +Allows the patient a worry-free day regarding his or her medications. </div>
+      <div class="panel-heading" id="stl2">Our goals</div>
+      <div class="panel-body" style= "text-align:left">
+      <div class="col-md-8">  
+        <i style="font-size:20px" class="fa">&#xf14a;</i> Reduce medication discontinuation<br>
+        <i style="font-size:20px" class="fa">&#xf14a;</i> Enable drug tracking and inventory management<br>
+        <i style="font-size:20px" class="fa">&#xf14a;</i> Improve the patient life<br>
+        <i style="font-size:20px" class="fa">&#xf14a;</i> Allows the patient a worry-free day regarding his or her medications. </div>
           </div>
         </div>
        </div>  
@@ -234,6 +233,7 @@ window.location='logout2.php';
 
       <div class="panel-heading" id="stl2">How does it work?</div>
       <div class="panel-body " style= "text-align:left">
+          <div class="col-md-8"> 
       <i style="font-size:20px" class="fa">&#xf0fe;</i>
       Buy a "SmartMed" device at the pharmacies. <br>
       <i style="font-size:20px" class="fa">&#xf0fe;</i>
@@ -244,24 +244,15 @@ Add medications and alerts, keep track of the medication. <br>
 Get alerted on the device itself when it the time to take the pill. <br>
 <i style="font-size:20px" class="fa">&#xf0fe;</i>
 After taking the pill, press the button so everyone will know that the pill was taken and no one will be worried!<br>
-      
       </div>
+      </div>
+    </div>
+   
+    <div>
+       <img src="img/PIC2.jpeg" alt="SmardMed device" width="90%" heigth="80%" >  
+        
     </div>
 <hr>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading" id="stl2">What makes us so special?</div>
-      <div class="panel-body">
-      
-      <div class="col-md-6">+ An automatic test during adding a alert is being conducted with the US National Library of Medicine to prevent the taking of medicines that should not be taken together. </div>
-           <div class="col-md-6">+ Managing inventory through the website, receiving email notifications if the medication is about to run out. </div>
-            <div class="col-md-6">+ sending an email notification if the medicine was not taken 30 minutes after the alert</div>
-            <div class="col-md-6">+ A friendly, small and comfortable device. Easy to use for all ages</div>
-      
-      </div>
-    </div>
-    
-    <hr>
 
     <div class="panel panel-primary">
       <div class="panel-heading" id="stl2">About the initiators </div>
@@ -298,21 +289,21 @@ After taking the pill, press the button so everyone will know that the pill was 
       <div class="tab-content">
         <div id="signup">   
           
-          <form action="/index.php" method="get">
+          <form action="/index.php" method="get" style="width:100%">
+          
           
           <div class="top-row">
+               <div class="field-wrap">
+              <label>
+                Email<span class="req">*</span>
+              </label>
+              <input type="email" name="Email" required autocomplete="off"/>
+            </div><br>
             <div class="field-wrap">
               <label>
                 Device Id<span class="req">*</span>
               </label>
               <input type="text" name="DeviceId" min="1000" max="100000" required data-validation-required-message="Please enter your Deivce id." required autocomplete="off" />
-            </div><br>
-        
-            <div class="field-wrap">
-              <label>
-                Email<span class="req">*</span>
-              </label>
-              <input type="email" name="Email" required autocomplete="off"/>
             </div>
           </div>
 
@@ -334,14 +325,14 @@ After taking the pill, press the button so everyone will know that the pill was 
           
             <div class="field-wrap">
             <label>
-              Email Address<span class="req">*</span>
+              Email<span class="req">*</span>
             </label>
             <input type="email" name="Email" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label>
-              Device ID<span class="req">*</span>
+              Device Id<span class="req">*</span>
             </label>
             <input type="text" name="DeviceId" required autocomplete="off"/>
           </div>
@@ -379,7 +370,6 @@ if ($_GET)
              echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
 				exit();
 			}
-
     else{
 //ולידציה אם המכשיר כבר קיים
     $ValidationIDsql = "SELECT * FROM Users WHERE DeviceID='$newBoxID'";
@@ -392,7 +382,6 @@ if ($_GET)
 			else{
 			     $sqlInsertNewUser="INSERT INTO Users (DeviceID, Name, Email) VALUES ($newBoxID,'$newName','$newEmail')";
                 $resultInsertNewUser = $conn->query($sqlInsertNewUser);
-
       if($resultInsertNewUser){
                 for($i=1;$i<=7;$i++){
                      $sqlInsertNewCells="INSERT INTO Cell (CellID, PillAmount, IfEmpty,DeviceID) VALUES ($i,0,1,$newBoxID)";
@@ -409,13 +398,9 @@ if ($_GET)
          }
  
       }
-
 }
 }
 			
-
-
-
     if ($_POST){ 
         
        // include_once 'dbl.inc.php';
@@ -449,7 +434,6 @@ if ($_GET)
 					
 				}
 				}    
-
 ?>
     <hr>
 
