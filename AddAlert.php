@@ -60,7 +60,12 @@ where $personalDeviceId =Alerts.DeviceID ORDER BY DayAlert,HourAlert
 
 
 //working
-$getDrugsName1="SELECT DrugName FROM UserDrugs WHERE UserDrugs.DeviceID=$personalDeviceId";
+
+$getDrugsName1="SELECT DrugName 
+FROM UserDrugs INNER JOIN Cell 
+ON (UserDrugs.DeviceID=Cell.DeviceID AND UserDrugs.CellID=Cell.CellID) 
+WHERE Cell.DeviceID=$personalDeviceId AND Cell.PillAmount>0";
+
         $resultCurrentDrugs1 = $conn->query($getDrugsName1);
 
 ?>
@@ -115,10 +120,10 @@ window.location='logout2.php';
 
   <body onload= "getDate();AddNewAlert()">
 
-        <!-- Navigation -->
+                    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container-fluid">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
@@ -126,44 +131,50 @@ window.location='logout2.php';
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ">
               
-              
             <li class="nav-item">
-              <a class="nav-link" >hello
-              <?php
-              
 
-              if( !isset($_SESSION['currentName']) ){
-                            echo "GUEST";
+              <a class="nav-link"  href="index.php"><img src="img/logo2.png" height="62px" width="250px" id = "logo" top="6px" poisition= fixed left = "0px" alt="SmartMed logo" ></a>
+              </li>
+              
+             <li class="nav-item" id = "space1">
+                 <a class="nav-link">
+         &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  </a>
+               <?php
+              if( isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("space1").style.display = "none";
+                        </script>
+                    <?php
                             }
-                else{
-                echo $_SESSION['currentName'];
-                ?>
-                <button type="button" class = "btn-primary btn-sm" style= "text-font: 12px" onClick="logout()">Log Out</button>
-                <?php
-                } 
-                ?>
-
-              </a>
-            </li>
-            </ul>
-            
-            <ul class= "navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.php">Smartmed</a>
+              ?>
+              
             </li>
             
+                          <li class="nav-item" id = "space2">
+           &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+               <?php
+              if( isset($_SESSION['currentName']) ){
+                    ?>
+                    <script type="text/javascript">
+                    document.getElementById("space2").style.display = "none";
+                        </script>
+                    <?php
+                            }
+              ?>
+              
+            </li>        
             
-            <li class="nav-item">
-              <a class="nav-link" id = "ana" class="ds" href="AddAlert.php">Add New alert</a>
+           <li class="nav-item">
+              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
                     <script type="text/javascript">
-                    document.getElementById("ana").style.display = "none";
+                    document.getElementById("AddAlert").style.display = "none";
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
@@ -178,13 +189,12 @@ window.location='logout2.php';
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "tracking" href="Tracking.php">Tracking stats</a>
+              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking status</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -193,7 +203,6 @@ window.location='logout2.php';
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
@@ -208,16 +217,31 @@ window.location='logout2.php';
                         </script>
                     <?php
                             }
-
               ?>
               
             </li>
             
-          </ul>
-           <ul class= "navbar-nav ml-auto">
-               </ul>
-                          <ul class= "navbar-nav ml-auto">
-               </ul>
+                        <li class="nav-item" >
+              <a class="nav-link"  >hello
+              <?php
+              
+              if( !isset($_SESSION['currentName']) ){
+                            echo "GUEST";
+                echo '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
+                    ';
+                            }
+                else{
+                echo $_SESSION['currentName'];
+                ?>
+                <button type="button" class = "btn btn-info btn-lg" style= "text-font: 12px"  onClick="logout()">Log Out</button>
+                <?php
+                } 
+                ?>
+
+              </a>
+            </li>
+            </ul>
+            
         </div>
       </div>
     </nav>
