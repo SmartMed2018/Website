@@ -35,12 +35,12 @@ $nowHour= date(" H");
 echo $nowHour;
 
 /*$sqlUpdateDrugTaken="UPDATE Alerts SET IfTake='1'
-      WHERE DayAlert=$todayID AND CellID = '2' AND HourAlert=$nowHour AND DeviceID='123'";*/
+      WHERE DayAlert=$todayID AND HourAlert=$nowHour AND CellID = '2' AND DeviceID='123'";*/
       
 $sqlUpdateDrugTaken="UPDATE Alerts SET IfTake='1'
-     WHERE DayAlert='1' AND CellID = '2' AND HourAlert='19' AND DeviceID='123'"; 
-      
-       $resultUpdateDrugTaken = $conn->query($sqlUpdateDrugTaken);
+     WHERE DayAlert='6' AND CellID = '2' AND HourAlert='14' AND DeviceID='123'"; 
+     $resultUpdateDrugTaken = $conn->query($sqlUpdateDrugTaken);
+
 
 $sqlGetPillAmount="Select PillAmount From Cell 
       WHERE CellID = '2' AND DeviceID='123'";  
@@ -48,9 +48,17 @@ $sqlGetPillAmount="Select PillAmount From Cell
        $resultGetPillAmount = $conn->query($sqlGetPillAmount);
 
       $row = $resultGetPillAmount->fetch_assoc();
+      if($row['PillAmount']>0)
+      {
+        echo "amount>0";
         $amount = $row['PillAmount']-1;
         echo $amount;
-        
+      }
+      else
+      {
+      $amount=0;
+      echo "amount=0";
+      }
         
 $sqlUpdateAmount="UPDATE Cell SET PillAmount=$amount
      WHERE CellID = '2' AND DeviceID='123'"; 
