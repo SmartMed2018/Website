@@ -334,22 +334,29 @@ $resultAdd = $conn->query($sqlAdd);
             if ($resultAdd->num_rows > 0) {
               while($row = $resultAdd->fetch_assoc()) {
                   
-
              		  if($row["DayAlert"] == $wantedDay && $wantedTime==$row["HourAlert"])
                             {
+                                                               echo "<br>";
+ 
+                                echo "there is day and hour the same".$flag;
                         	    if($row["DrugName"]== $personalDrug)
                         	    {
                                     echo "<p style='color:red;'>";
                         	        echo "This medicine has already been taken at this time </p>";
                         	           $flag=1;
+                                echo "<br>";
+                                echo "first if".$flag;
                         	    }
-                            else{
+                            
+                            else
+                            {
+                                echo "entering the else".$flag;
                         	for ($i = 0; $i <= 3; $i++) {
 	    
                                 if ($arrayForNames[$i]== $row["DrugName"]) 
                                 {
-                                    echo $arrayForNames[$i];
-                                    echo "<br>";
+                                    //echo $arrayForNames[$i];
+                                   // echo "<br>";
                                     echo "<p style='color:red;'>";
                                     echo "This drug can not be taken in parallel with $arrayForNames[$i] drug on ";
                                       if($wantedDay==1)
@@ -371,76 +378,63 @@ $resultAdd = $conn->query($sqlAdd);
                                         
                                        echo " at $wantedTime:00 . Please select a different time </p>";
                                         $flag=1;
-                                                                                
-
-                                }
-                            }
-                            
-                           }
-                           }
-              }}
-
-
-             		         if($flag ==  0)
-                            {
-
-                                    echo "An alarm was added on ";
-                                      if($wantedDay==1)
-                                            echo "Sunday";
-                                                                                if($wantedDay==2)
-                                            echo "Monday";
-                                                                                if($wantedDay==3)
-                                            echo "Tuesday";
-                                                                                if($wantedDay==4)
-                                            echo "Wednesday";
-                                                                            
-                                        if($wantedDay==5)
-                                            echo "Thursday";
-                                                                            
-                                       if($wantedDay==6)
-                                            echo "Friday";
-                                                                                 if($wantedDay==7)
-                                            echo "Saturday";
-                                    
-                                    
-                                    echo " at $wantedTime:00.<br>";
-                                    echo "<br>";
-}
-
+                                }// if there is an ineraction
+                            }//for for the 3 drugs
+                         }// else the alert not exists
+                  }//if there is already time like this in the table
+                echo "<br>";
+                echo "first while".$flag;
+              }//while rows
+                echo "<br>";
+                echo "first if".$flag;                
+            }//if rows of the current table alert
+                echo "<br>";
+                echo "finising the loop".$flag;
+if($flag==0){
 
 $sqlChekingCellID = "SELECT CellID,DrugName from UserDrugs WHERE $personalDeviceId=DeviceID";
-
 $resultChekingCellID = $conn->query($sqlChekingCellID);
-
 if ($resultChekingCellID->num_rows > 0) {
     // output data of each row
     while($row = $resultChekingCellID->fetch_assoc()) {
-        if($row["DrugName"]==$personalDrug){
+        if($row["DrugName"]==$personalDrug)
+        {
             $CurrentCell=$row["CellID"];
         }
     }
-} else {
+} 
+else {
     echo "0 results";
 }
 
-
  $sqlAddAlert = "INSERT INTO Alerts(DayAlert, HourAlert, IfTake, CellID, DeviceID) VALUES ($wantedDay, $wantedTime, 0, $CurrentCell, $personalDeviceId)";
+ 
+//show msg after adding an alert
   $resultAddAlert= $conn->query($sqlAddAlert);
+     echo "An alarm was added on ";
+         if($wantedDay==1)
+            echo "Sunday";
+        if($wantedDay==2)
+            echo "Monday";
+        if($wantedDay==3)
+            echo "Tuesday";
+        if($wantedDay==4)
+            echo "Wednesday";
+        if($wantedDay==5)
+            echo "Thursday";
+        if($wantedDay==6)
+            echo "Friday";
+        if($wantedDay==7)
+            echo "Saturday";
+        echo " at $wantedTime:00.<br>";
+        echo "<br>";
 
+}//if flag=0
   
-
-
-            
-
-
- }
-
-
-
-
+ }//get hours
+}//get days
 }
 
-}
 else{
     $message = "Please complete all fields in order to add an alert";
     echo "<script type='text/javascript'>alert('$message');</script>";
