@@ -49,7 +49,7 @@ if ($conn->connect_error) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Account</title>
+    <title>SmartMed</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -122,7 +122,7 @@ window.location='logout2.php';
             </li>        
             
            <li class="nav-item">
-              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New alert</a>
+              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New Alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -136,7 +136,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "amount" href="Amount.php">Check amount</a>
+              <a class="nav-link" id = "amount" href="Amount.php">Check Amount</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -150,7 +150,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking status</a>
+              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking Status</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -164,7 +164,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage medicine</a>
+              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage Medicines</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -178,7 +178,7 @@ window.location='logout2.php';
             </li>
             
                         <li class="nav-item" >
-              <a class="nav-link"  >hello
+              <a class="nav-link"  >Hello
               <?php
               
               if( !isset($_SESSION['currentName']) ){
@@ -208,9 +208,7 @@ window.location='logout2.php';
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="page-heading">
-              <h1>My Account</h1>
-            </div>
+            
           </div>
         </div>
       </div>
