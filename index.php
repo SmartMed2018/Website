@@ -64,13 +64,14 @@ window.location='logout2.php';
 	  display:none;
   }
  }
+ 
  </style>
   </head>
 
   <body>
 
                <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container-fluid">
          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
@@ -81,8 +82,10 @@ window.location='logout2.php';
           <ul class="navbar-nav ">
               
             <li class="nav-item">
-
-              <a class="nav-link"  href="index.php"><img src="img/logo2.png" height="80%" width="250px" id = "logo" top="6px" poisition= fixed left = "0px" alt="SmartMed logo" ></a>
+            <div>
+              <a class="nav-link"  href="index.php"><img src="img/logo2.png" height="80%" width="250px" id = "logo" top="6px" poisition= fixed left = "0px" alt="SmartMed logo" ></a>  
+            </div>
+              
               </li>
               
              <li class="nav-item" id = "space1">
@@ -115,7 +118,7 @@ window.location='logout2.php';
             </li>        
             
            <li class="nav-item">
-              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New alert</a>
+              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add new alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -157,7 +160,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link center" id = "manage" href="ManageMedicine.php">Manage medicine</a>
+              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage medicine</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -171,11 +174,11 @@ window.location='logout2.php';
             </li>
             
                         <li class="nav-item" >
-              <a class="nav-link"  >hello
+              <a class="nav-link"  >Hello
               <?php
               
               if( !isset($_SESSION['currentName']) ){
-                            echo "GUEST";
+                            echo "Guest";
                 echo '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
                     ';
                             }
@@ -195,42 +198,46 @@ window.location='logout2.php';
       </div>
     </nav>
     
-    <!-- Page Header -->
+     <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/home-bg.jpg')">
       <div class="overlay"></div>
-      
+    
     </header>
 			
         <div class="container">
             
-            <p style="text-align: left;"><b> <span style="color:#17a2b8; font-size: 40px">SmartMed</span>, The new smart pill taking system that Helps you<br> take medication in an orderly manner,<br>
-			smartmed will let you know when its medication taking time<br> and 
+            <h1 class="stl1">SmartMed</h1>
+            
+            <p style="text-align: left;"><b>Meeting The new smart pill taking system that Helps you take medication in an orderly manner,<br>
+			smartmed will let you know when its medication taking time and 
 			inform your contact of current updates.</b></p>            
             
-    <div>
-        	 			<img src="img/PIC1.jpeg" alt="SmardMed device" width="200px" heigth="250px" class="img1">   
-    
-    </div>
-		
-			<hr style="margin-top:7rem;">
+            
+			<hr>
         
      <div class="panel-group">
      
     <div class="panel panel-primary">
-      <div class="panel-heading" id="stl2">Our goals</div>
+      <div class="panel-heading" id="stl2">Why to use ?</div>
       <div class="panel-body" style= "text-align:left">
       <div class="col-md-8">  
-        <i style="font-size:20px" class="fa">&#xf14a;</i> Reduce medication discontinuation<br>
-        <i style="font-size:20px" class="fa">&#xf14a;</i> Enable drug tracking and inventory management<br>
-        <i style="font-size:20px" class="fa">&#xf14a;</i> Improve the patient life<br>
-        <i style="font-size:20px" class="fa">&#xf14a;</i> Allows the patient a worry-free day regarding his or her medications. </div>
+        <i style="font-size:20px" class="fa">&#xf14a;</i> Never forget your medication <br>
+        <i style="font-size:20px" class="fa">&#xf14a;</i> Keep tracking on inventory management<br>
+        <i style="font-size:20px" class="fa">&#xf14a;</i> Improving the patient life<br>
+         </div>
           </div>
         </div>
        </div>  
+       <div clas="imgrow">
+        <img src="img/PIC3.jpeg" alt="SmardMed device" width="20%" class="img1">   
        
-       <hr>
+       <img src="img/PIC4.jpeg" alt="SmardMed device" width="30%" class="img2">    
+       </div>
+    	
+       
+       <hr class="h1">
             <div class="panel panel-primary">
-
+                
       <div class="panel-heading" id="stl2">How does it work?</div>
       <div class="panel-body " style= "text-align:left">
           <div class="col-md-8"> 
@@ -248,10 +255,6 @@ After taking the pill, press the button so everyone will know that the pill was 
       </div>
     </div>
    
-    <div>
-       <img src="img/PIC2.jpeg" alt="SmardMed device" width="90%" heigth="80%" >  
-        
-    </div>
 <hr>
 
     <div class="panel panel-primary">
@@ -260,9 +263,9 @@ After taking the pill, press the button so everyone will know that the pill was 
       
       <div id="b"><b>Ido Keynan</b><br>I.S Student at MTA<br> Segmentation Specialist- Taboola   </div>
       <div id="b"><b>Shani Reuveni</b><br>
-           I.S Student at MTA<br> PMO IT - Strauss Water</div>
+           I.S Student at MTA<br> PMO IT - Strauss Water<br>&nbsp</div>
       <div id="b"><b>Adam Kobo</b><br>
-            I.S Studentat MTA<br> QA Engineer - Hola </div>
+            I.S Studentat MTA<br> QA Engineer - Hola <br>&nbsp </div>
 
       
       </div>
@@ -469,7 +472,7 @@ if ($_GET)
                 </a>
               </li>
             </ul>
-            <p class="copyright text-muted">For contact: noreply.smartmed@gmail.com <br> Copyright &copy; SmartMed team 2018</p>
+            <p class="copyright text-muted">For contact: support@smartmed.com <br> Copyright &copy; SmartMed team 2018</p>
           </div>
         </div>
       </div>
