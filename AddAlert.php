@@ -80,7 +80,7 @@ WHERE Cell.DeviceID=$personalDeviceId AND Cell.PillAmount>0";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Account</title>
+    <title>SmartMed</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -165,8 +165,8 @@ window.location='logout2.php';
               
             </li>        
             
-           <li class="nav-item">
-              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New alert</a>
+                    <li class="nav-item">
+              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New Alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -180,7 +180,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "amount" href="Amount.php">Check amount</a>
+              <a class="nav-link" id = "amount" href="Amount.php">Check Amount</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -194,7 +194,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking status</a>
+              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking Status</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -208,7 +208,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage medicine</a>
+              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage Medicines</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -222,7 +222,7 @@ window.location='logout2.php';
             </li>
             
                         <li class="nav-item" >
-              <a class="nav-link"  >hello
+              <a class="nav-link"  >Hello
               <?php
               
               if( !isset($_SESSION['currentName']) ){
@@ -252,9 +252,6 @@ window.location='logout2.php';
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="page-heading">
-              <h1>My Account</h1>
-            </div>
           </div>
         </div>
       </div>
@@ -306,13 +303,13 @@ window.location='logout2.php';
 						<div><br>
 						<b> Time to take the medicine </b>
 						&nbsp <input id="Morning" name="time[]" type="checkbox" value="9"  />  
-						<label>Morning</label> &nbsp
+						<label>Morning  9:00</label> &nbsp
 						<input id="Noon" name="time[]" type="checkbox" value="14" />
-						<label>Noon</label> &nbsp
+						<label>Noon 14:00</label> &nbsp
 						<input id="evening" name="time[]" type="checkbox" value="19" />
-						<label>Evening</label> &nbsp
+						<label>Evening 19:00</label> &nbsp
 						<input id="Night" name="time[]" type="checkbox" value="22" />
-						<label>Night</label> &nbsp
+						<label>Night 22:00</label> &nbsp
 						</div><br><center>
 						<input type="submit" class="btn-primary btn" value="Add alert" id="clickMe"></center> <br><br>	
 		</form>	
@@ -336,21 +333,16 @@ $resultAdd = $conn->query($sqlAdd);
                   
              		  if($row["DayAlert"] == $wantedDay && $wantedTime==$row["HourAlert"])
                             {
-                                                               echo "<br>";
- 
-                                echo "there is day and hour the same".$flag;
+
                         	    if($row["DrugName"]== $personalDrug)
                         	    {
                                     echo "<p style='color:red;'>";
                         	        echo "This medicine has already been taken at this time </p>";
                         	           $flag=1;
-                                echo "<br>";
-                                echo "first if".$flag;
                         	    }
                             
                             else
                             {
-                                echo "entering the else".$flag;
                         	for ($i = 0; $i <= 3; $i++) {
 	    
                                 if ($arrayForNames[$i]== $row["DrugName"]) 
@@ -382,14 +374,8 @@ $resultAdd = $conn->query($sqlAdd);
                             }//for for the 3 drugs
                          }// else the alert not exists
                   }//if there is already time like this in the table
-                echo "<br>";
-                echo "first while".$flag;
               }//while rows
-                echo "<br>";
-                echo "first if".$flag;                
             }//if rows of the current table alert
-                echo "<br>";
-                echo "finising the loop".$flag;
 if($flag==0){
 
 $sqlChekingCellID = "SELECT CellID,DrugName from UserDrugs WHERE $personalDeviceId=DeviceID";
