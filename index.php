@@ -118,7 +118,7 @@ window.location='logout2.php';
             </li>        
             
            <li class="nav-item">
-              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add new alert</a>
+              <a class="nav-link" id = "AddAlert" href="AddAlert.php">Add New Alert</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -132,7 +132,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "amount" href="Amount.php">Check amount</a>
+              <a class="nav-link" id = "amount" href="Amount.php">Check Amount</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -146,7 +146,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking status</a>
+              <a class="nav-link center" id = "tracking" href="Tracking.php">Tracking Status</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -160,7 +160,7 @@ window.location='logout2.php';
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage medicine</a>
+              <a class="nav-link" id = "manage" href="ManageMedicine.php">Manage Medicines</a>
                <?php
               if( !isset($_SESSION['currentName']) ){
                     ?>
@@ -348,10 +348,7 @@ After taking the pill, press the button so everyone will know that the pill was 
 	    </div>
 	 </div>
 	 </div>
-		              </div>
-		                            </div>
 
-    </div>
     </div>
     </div>
 
@@ -390,10 +387,34 @@ if ($_GET)
                      $sqlInsertNewCells="INSERT INTO Cell (CellID, PillAmount, IfEmpty,DeviceID) VALUES ($i,0,1,$newBoxID)";
                     $resultInsertNewCells = $conn->query($sqlInsertNewCells);
             }
-					    $message = "Welcome to SmartMed!";
-             echo "<script type='text/javascript'>alert('$message');</script>";
+					   
+
+			$ChekingDatasql = "SELECT * FROM Users WHERE Email = '$newEmail' AND DeviceID='$newBoxID'";
+			echo "getting the query";
+			echo "<br>";
+			$ChekingDataResult = $conn->query($ChekingDatasql);
+	        	if ($ChekingDataResult->num_rows > 0)
+	        	{
+					$row = $ChekingDataResult->fetch_assoc();
+                    //correct information
+					$_SESSION['currentDeviceId'] = $row['DeviceID'];
+					$_SESSION['currentName'] = $row['Name'];
+					$_SESSION['CurrentEmail'] = $row['Email'];
+                    
+                    header("Location: ./index.php");
+        			$message = "Welcome to SmartMed!";
+        		 echo "<script type='text/javascript'>alert('$message');</script>";
+                    
+	        	    
+	        	}
+		
+			
+				else {
+				    $message = "Something went wrong";
+             echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
+				exit();    
       }
-      
+      }
       else{
 			 $message = "Something went wrong";
              echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
@@ -413,7 +434,8 @@ if ($_GET)
 			echo "getting the query";
 			echo "<br>";
 			$ChekingDataResult = $conn->query($ChekingDatasql);
-	        	if ($ChekingDataResult->num_rows < 1) {
+	        	if ($ChekingDataResult->num_rows < 1)
+	        	{
 					    $message = "One or more of the details is not correct";
              echo "<script type='text/javascript'>alert('$message');window.location = 'http://shaniru.mtacloud.co.il'</script>";
 				exit();
@@ -426,13 +448,7 @@ if ($_GET)
 					$_SESSION['currentDeviceId'] = $row['DeviceID'];
 					$_SESSION['currentName'] = $row['Name'];
 					$_SESSION['CurrentEmail'] = $row['Email'];
-					
-					echo "name is ".$_SESSION['currentDeviceId'];
-					echo "<br>";
-					echo "name is ".$_SESSION['currentName'];
-					echo "<br>";
-					echo "name is ".$_SESSION['CurrentEmail'];
-					echo "<br>";
+
 					header("Location: ./index.php");
 					
 				}
@@ -493,5 +509,8 @@ if ($_GET)
     }*/
     </script>
   </body>
+
+
+
 
 </html>
